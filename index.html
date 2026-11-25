@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Miku Tsuneyama — Japanese AI Trainer / Japanese Language Specialist</title>
+  <meta name="description" content="Miku Tsuneyama: Japanese AI Trainer and Japanese Language Specialist. Accurate, natural Japanese for AI models and global teams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Colors & basics ===== */
+    :root {
+      --bg: #FAF9F7;
+      --bg-soft: #F2EFE9;
+      --card: #FFFFFF;
+      --ink: #1F1E1C;
+      --ink-2: #4A463F;
+      --muted: #5C574E;
+      --label: #6B6150;
+      --line: #E4E0D8;
+      --accent: #7C8B6F;
+      --radius: 16px;
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Work Sans", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    a { color: var(--ink); }
+    a:hover { color: var(--label); }
+    /* 見出し: Lora(セリフ体) / 本文: Work Sans */
+    h1, h2, h3 { font-family: Lora, Georgia, serif; font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+    h3 { letter-spacing: 0; }
+    p { margin: 0; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .eyebrow { font-size: 13px; letter-spacing: 0.12em; color: var(--label); text-transform: uppercase; }
+    section { scroll-margin-top: 80px; }
+
+    /* ===== Header ===== */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(250, 249, 247, 0.92); backdrop-filter: blur(6px); border-bottom: 1px solid transparent; }
+    header.scrolled { border-bottom-color: var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+    .logo { font-family: Lora, Georgia, serif; font-weight: 600; font-size: 18px; text-decoration: none; }
+    .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; font-size: 14px; }
+    .nav ul a { text-decoration: none; }
+
+    /* ===== Buttons ===== */
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 48px; padding: 0 24px; border-radius: 999px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      border: 1px solid var(--ink); transition: background .2s, color .2s;
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: #3A3833; color: var(--bg); }
+    .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+
+    /* ===== 1. Hero ===== */
+    .hero { padding: 72px 0 96px; }
+    .hero .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 56px; }
+    .hero-text { flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+    .status { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.2; max-width: 640px; }
+    .role { font-size: 18px; color: var(--label); font-weight: 500; margin-bottom: -8px; }
+    .lead { font-size: 18px; color: var(--ink-2); max-width: 560px; }
+    .photo {
+      flex: 1 1 300px; max-width: 380px; aspect-ratio: 4 / 5; margin: 0;
+      border-radius: 20px; background: #ECE8E1; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      color: #6B655B; font-size: 13px; text-align: center; padding: 16px;
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== 2. About ===== */
+    .about { background: var(--bg-soft); padding: 104px 0; }
+    .about .wrap { display: flex; flex-wrap: wrap; gap: 56px; }
+    .about-head { flex: 1 1 300px; display: flex; flex-direction: column; gap: 12px; }
+    .about-head h2, .case-head h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; }
+    .about-body { flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 40px; }
+    .about-body > p { font-size: 17px; color: var(--ink-2); }
+    .points { display: flex; flex-wrap: wrap; gap: 20px; }
+    .point { flex: 1 1 260px; background: var(--card); border: 1px solid #E8E4DC; border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .point h3 { font-size: 17px; }
+    .point p { font-size: 15px; color: var(--ink-2); }
+    .sub { font-size: 13px; letter-spacing: 0.12em; color: var(--label); text-transform: uppercase; margin-bottom: -24px; }
+
+    /* ===== 3. Case Work ===== */
+    .cases { padding: 104px 0; }
+    .case-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 48px; }
+    .case-head .note { max-width: 380px; font-size: 14px; color: var(--muted); }
+    .case-list { display: flex; flex-direction: column; gap: 24px; }
+    .case { background: var(--card); border: 1px solid #E8E4DC; border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .case-tag { font-size: 13px; color: var(--label); }
+    .case h3 { font-size: 22px; line-height: 1.4; }
+    .steps { display: flex; flex-wrap: wrap; gap: 16px; }
+    .step { flex: 1 1 240px; border-top: 2px solid var(--line); padding-top: 14px; }
+    .step strong { display: block; font-size: 12px; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+    .step:last-child { border-top-color: var(--accent); }
+    .step p { font-size: 15px; color: var(--ink-2); }
+    .case.soon { background: transparent; border-style: dashed; border-color: #CFC9BE; }
+
+    /* ===== 4. Contact ===== */
+    .contact { padding: 120px 0; border-top: 1px solid var(--line); }
+    .contact .wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .contact h2 { font-size: clamp(34px, 5.5vw, 56px); line-height: 1.1; max-width: 760px; }
+    .contact p { font-size: 17px; color: var(--ink-2); max-width: 560px; }
+
+    footer { border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 24px; padding-bottom: 24px; }
+
+    /* ===== Smartphone ===== */
+    @media (max-width: 640px) {
+      .nav ul { gap: 16px; font-size: 13px; }
+      .hero { padding: 40px 0 72px; }
+      .about, .cases { padding: 72px 0; }
+      .contact { padding: 88px 0; }
+      .case { padding: 24px; }
+      .photo { max-width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#top">Miku Tsuneyama</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#cases">Case Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="status">Available for remote work · Based in Japan (JST)</p>
+        <p class="role">Hi, I'm Miku.</p>
+        <h1 id="hero-title">Japanese AI Trainer &amp; Japanese Language Specialist</h1>
+        <p class="lead">I help AI models and global teams get Japanese right: accurate, natural, and true to what Japanese readers expect.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="#contact">Contact me →</a>
+          <a class="btn btn-ghost" href="#cases">See my work</a>
+        </div>
+      </div>
+      <!-- 写真を入れるとき: 下の div を <figure class="photo"><img src="photo.jpg" alt="Portrait of Miku Tsuneyama"></figure> に置き換える -->
+      <div class="photo" role="img" aria-label="Portrait photo placeholder">[ Portrait photo ]</div>
+    </div>
+  </section>
+
+  <!-- 2. About -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="about-head">
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">Twenty years of work where every word matters.</h2>
+      </div>
+      <div class="about-body">
+        <p>I have worked since 2006 in roles where small mistakes have real costs. For eight years I was an IT and network engineer, running networks for a major telecom company and a medical corporation and writing incident reports. At the telecom company I also reviewed lease and land-right contracts for new base stations, checking both the Japanese wording and the terms. Since 2021 I have worked at a Japanese government agency, handling payroll, employee benefits, information security and digital transformation. Now I bring that same care to Japanese language quality for AI and global teams.</p>
+
+        <p class="sub">Strengths</p>
+        <div class="points">
+          <div class="point">
+            <h3>Precise reading</h3>
+            <p>Years of contract review trained me to notice ambiguous wording and small inconsistencies.</p>
+          </div>
+          <div class="point">
+            <h3>IT background</h3>
+            <p>I understand technical and IT content, so I can judge Japanese in manuals, software and support text.</p>
+          </div>
+          <div class="point">
+            <h3>Clear written feedback</h3>
+            <p>Writing incident reports taught me to explain problems and fixes so anyone can follow them.</p>
+          </div>
+        </div>
+
+        <p class="sub">What I value</p>
+        <div class="points">
+          <div class="point">
+            <h3>Accuracy first</h3>
+            <p>I check facts and meaning before style. Natural Japanese starts with correct Japanese.</p>
+          </div>
+          <div class="point">
+            <h3>Reasons, not just edits</h3>
+            <p>Every change I suggest comes with why, so your team can apply it next time.</p>
+          </div>
+          <div class="point">
+            <h3>Reliable communication</h3>
+            <p>I follow guidelines closely, ask when something is unclear, and keep you updated.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Case Work -->
+  <section class="cases" id="cases" aria-labelledby="cases-title">
+    <div class="wrap">
+      <div class="case-head">
+        <div>
+          <p class="eyebrow">Case Work</p>
+          <h2 id="cases-title">How I have worked.</h2>
+        </div>
+        <p class="note">Cases from my career so far. Japanese AI evaluation and language QA samples will be added here.</p>
+      </div>
+
+      <div class="case-list">
+        <article class="case">
+          <p class="case-tag">Contract review · Telecom</p>
+          <h3>Checking contracts for new base stations</h3>
+          <div class="steps">
+            <div class="step"><strong>CHALLENGE</strong><p>Lease and land-right contracts for new base stations had to be correct in both wording and terms before signing.</p></div>
+            <div class="step"><strong>ACTION</strong><p>I reviewed each contract for unclear Japanese expressions and for terms that did not match the agreement.</p></div>
+            <div class="step"><strong>RESULT</strong><p>Issues were found and fixed before signing, so the contracts went forward with clear wording.</p></div>
+          </div>
+        </article>
+
+        <article class="case">
+          <p class="case-tag">Incident reports · Network operations</p>
+          <h3>Explaining network incidents in writing</h3>
+          <div class="steps">
+            <div class="step"><strong>CHALLENGE</strong><p>When network problems occurred, people needed to understand what happened, including readers without a technical background.</p></div>
+            <div class="step"><strong>ACTION</strong><p>I wrote incident reports that set out the cause, impact and response in clear, ordered Japanese.</p></div>
+            <div class="step"><strong>RESULT</strong><p>The reports were used to share what happened and how it was handled.</p></div>
+          </div>
+        </article>
+
+        <article class="case">
+          <p class="case-tag">Payroll &amp; benefits · Government</p>
+          <h3>Accurate payroll and benefits administration</h3>
+          <div class="steps">
+            <div class="step"><strong>CHALLENGE</strong><p>Payroll and employee benefits must be correct every time, under detailed rules.</p></div>
+            <div class="step"><strong>ACTION</strong><p>I processed payroll and benefits work by following the rules closely and checking each item.</p></div>
+            <div class="step"><strong>RESULT</strong><p>Staff were paid and supported according to the rules.</p></div>
+          </div>
+        </article>
+
+        <article class="case soon">
+          <p class="case-tag">Japanese AI evaluation · Coming soon</p>
+          <h3>Sample: scoring Japanese AI answers with a rubric</h3>
+          <p style="color: var(--muted); font-size: 15px;">A self-initiated sample showing my criteria, scores and written feedback.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Contact -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title">Let's make your Japanese right.</h2>
+      <p>Open to Japanese AI training and evaluation, and Japanese language quality work. Remote, part-time or project-based.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="mailto:MikuTsuneyamaJPW@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/miku-tsuneyama/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Miku Tsuneyama</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  // 年を自動で今年にする
+  document.getElementById("year").textContent = new Date().getFullYear();
+  // スクロールしたらヘッダーの下に線を出す
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", function () {
+    header.classList.toggle("scrolled", window.scrollY > 8);
+  });
+</script>
+</body>
+</html>
