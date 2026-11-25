@@ -50,6 +50,31 @@
     .logo { font-family: Lora, Georgia, serif; font-weight: 600; font-size: 18px; text-decoration: none; }
     .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; font-size: 14px; }
     .nav ul a { text-decoration: none; }
+    .nav nav { margin-left: auto; }
+
+    /* ===== Language toggle ===== */
+    .lang-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 40px; padding: 0 14px; border-radius: 999px;
+      border: 1px solid #D8D3CA; background: transparent; cursor: pointer;
+      font: inherit; font-size: 13px; color: var(--muted);
+    }
+    .lang-toggle:hover { border-color: var(--ink); }
+    .lang-toggle [data-lang] { padding: 2px 0; }
+    html[lang="en"] .lang-toggle [data-lang="en"],
+    html[lang="ja"] .lang-toggle [data-lang="ja"] { color: var(--ink); font-weight: 600; border-bottom: 1.5px solid var(--accent); }
+
+    /* ===== 日本語表示のときの調整 ===== */
+    html[lang="ja"] body { line-height: 1.9; }
+    html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3,
+    html[lang="ja"] .questions li, html[lang="ja"] .contact p.answer {
+      font-family: Lora, "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+      letter-spacing: 0.02em;
+    }
+    html[lang="ja"] .hero h1 { line-height: 1.35; font-size: clamp(26px, 5vw, 52px); }
+    html[lang="ja"] .about-head h2, html[lang="ja"] .case-head h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.4; }
+    /* 日本語の見出しが変な位置で改行されないよう、まとまりごとに折り返す */
+    .nb { display: inline-block; }
 
     /* ===== Buttons ===== */
     .btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -133,6 +158,10 @@
     /* ===== Smartphone ===== */
     @media (max-width: 640px) {
       .nav ul { gap: 16px; font-size: 13px; }
+      /* スマホ: 1段目に名前と言語ボタン、2段目にメニュー */
+      .nav { flex-wrap: wrap; row-gap: 0; padding: 10px 24px 8px; }
+      .lang-toggle { margin-left: auto; }
+      .nav nav { order: 3; width: 100%; margin-left: 0; }
       .hero { padding: 40px 0 72px; }
       .about, .cases { padding: 72px 0; }
       .contact { padding: 88px 0; }
@@ -152,11 +181,15 @@
     <a class="logo" href="#top">Miku Tsuneyama</a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#cases">Case Work</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#cases" data-i18n="nav_cases">Case Work</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
       </ul>
     </nav>
+    <!-- 言語切り替えボタン -->
+    <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language / 言語を切り替える">
+      <span data-lang="en">EN</span><span aria-hidden="true">/</span><span data-lang="ja">JA</span>
+    </button>
   </div>
 </header>
 
@@ -166,17 +199,17 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div class="hero-text">
-        <p class="status">Available for remote work · Based in Japan (JST)</p>
-        <p class="role">Hi, I'm Miku.</p>
-        <h1 id="hero-title">Japanese AI Trainer &amp; Japanese Language Specialist</h1>
-        <p class="lead">I help AI models and global teams get Japanese right: accurate, natural, and true to what Japanese readers expect.</p>
+        <p class="status" data-i18n="status">Available for remote work · Based in Japan (JST)</p>
+        <p class="role" data-i18n="hello">Hi, I'm Miku.</p>
+        <h1 id="hero-title" data-i18n="h1">Japanese AI Trainer &amp; Japanese Language Specialist</h1>
+        <p class="lead" data-i18n="lead">I help AI models and global teams get Japanese right: accurate, natural, and true to what Japanese readers expect.</p>
         <div class="btns">
-          <a class="btn btn-primary" href="#contact">Contact me →</a>
-          <a class="btn btn-ghost" href="#cases">See my work</a>
+          <a class="btn btn-primary" href="#contact" data-i18n="btn_contact">Contact me →</a>
+          <a class="btn btn-ghost" href="#cases" data-i18n="btn_work">See my work</a>
         </div>
       </div>
       <!-- 写真を入れるとき: 下の div を <figure class="photo"><img src="photo.jpg" alt="Portrait of Miku Tsuneyama"></figure> に置き換える -->
-      <div class="photo" role="img" aria-label="Portrait photo placeholder">[ Portrait photo ]</div>
+      <div class="photo" role="img" aria-label="Portrait photo placeholder" data-i18n="photo">[ Portrait photo ]</div>
     </div>
   </section>
 
@@ -184,41 +217,41 @@
   <section class="about" id="about" aria-labelledby="about-title">
     <div class="wrap">
       <div class="about-head">
-        <p class="eyebrow">About</p>
-        <h2 id="about-title">Twenty years of work where every word matters.</h2>
+        <p class="eyebrow" data-i18n="about_eyebrow">About</p>
+        <h2 id="about-title" data-i18n="about_h2">Twenty years of work where every word matters.</h2>
       </div>
       <div class="about-body">
-        <p>I have worked since 2006 in roles where small mistakes have real costs. For eight years I was an IT and network engineer, running networks for a major telecom company and a medical corporation and writing incident reports. At the telecom company I also reviewed lease and land-right contracts for new base stations, checking both the Japanese wording and the terms. Since 2021 I have worked at a Japanese government agency, handling payroll, employee benefits, information security and digital transformation. Now I bring that same care to Japanese language quality for AI and global teams.</p>
+        <p data-i18n="about_body">I have worked since 2006 in roles where small mistakes have real costs. For eight years I was an IT and network engineer, running networks for a major telecom company and a medical corporation and writing incident reports. At the telecom company I also reviewed lease and land-right contracts for new base stations, checking both the Japanese wording and the terms. Since 2021 I have worked at a Japanese government agency, handling payroll, employee benefits, information security and digital transformation. Now I bring that same care to Japanese language quality for AI and global teams.</p>
 
-        <p class="sub">Strengths</p>
+        <p class="sub" data-i18n="sub_strengths">Strengths</p>
         <div class="points">
           <div class="point">
-            <h3>Precise reading</h3>
-            <p>Years of contract review trained me to notice ambiguous wording and small inconsistencies.</p>
+            <h3 data-i18n="s1_h">Precise reading</h3>
+            <p data-i18n="s1_p">Years of contract review trained me to notice ambiguous wording and small inconsistencies.</p>
           </div>
           <div class="point">
-            <h3>IT background</h3>
-            <p>I understand technical and IT content, so I can judge Japanese in manuals, software and support text.</p>
+            <h3 data-i18n="s2_h">IT background</h3>
+            <p data-i18n="s2_p">I understand technical and IT content, so I can judge Japanese in manuals, software and support text.</p>
           </div>
           <div class="point">
-            <h3>Clear written feedback</h3>
-            <p>Writing incident reports taught me to explain problems and fixes so anyone can follow them.</p>
+            <h3 data-i18n="s3_h">Clear written feedback</h3>
+            <p data-i18n="s3_p">Writing incident reports taught me to explain problems and fixes so anyone can follow them.</p>
           </div>
         </div>
 
-        <p class="sub">What I value</p>
+        <p class="sub" data-i18n="sub_values">What I value</p>
         <div class="points">
           <div class="point">
-            <h3>Accuracy first</h3>
-            <p>I check facts and meaning before style. Natural Japanese starts with correct Japanese.</p>
+            <h3 data-i18n="v1_h">Accuracy first</h3>
+            <p data-i18n="v1_p">I check facts and meaning before style. Natural Japanese starts with correct Japanese.</p>
           </div>
           <div class="point">
-            <h3>Reasons, not just edits</h3>
-            <p>Every change I suggest comes with why, so your team can apply it next time.</p>
+            <h3 data-i18n="v2_h">Reasons, not just edits</h3>
+            <p data-i18n="v2_p">Every change I suggest comes with why, so your team can apply it next time.</p>
           </div>
           <div class="point">
-            <h3>Reliable communication</h3>
-            <p>I follow guidelines closely, ask when something is unclear, and keep you updated.</p>
+            <h3 data-i18n="v3_h">Reliable communication</h3>
+            <p data-i18n="v3_p">I follow guidelines closely, ask when something is unclear, and keep you updated.</p>
           </div>
         </div>
       </div>
@@ -230,47 +263,47 @@
     <div class="wrap">
       <div class="case-head">
         <div>
-          <p class="eyebrow">Case Work</p>
-          <h2 id="cases-title">How I have worked.</h2>
+          <p class="eyebrow" data-i18n="cases_eyebrow">Case Work</p>
+          <h2 id="cases-title" data-i18n="cases_h2">How I have worked.</h2>
         </div>
-        <p class="note">Cases from my career so far. Japanese AI evaluation and language QA samples will be added here.</p>
+        <p class="note" data-i18n="cases_note">Cases from my career so far. Japanese AI evaluation and language QA samples will be added here.</p>
       </div>
 
       <div class="case-list">
         <article class="case">
-          <p class="case-tag">Contract review · Telecom</p>
-          <h3>Checking contracts for new base stations</h3>
+          <p class="case-tag" data-i18n="c1_tag">Contract review · Telecom</p>
+          <h3 data-i18n="c1_h">Checking contracts for new base stations</h3>
           <div class="steps">
-            <div class="step"><strong>CHALLENGE</strong><p>Lease and land-right contracts for new base stations had to be correct in both wording and terms before signing.</p></div>
-            <div class="step"><strong>ACTION</strong><p>I reviewed each contract for unclear Japanese expressions and for terms that did not match the agreement.</p></div>
-            <div class="step"><strong>RESULT</strong><p>Issues were found and fixed before signing, so the contracts went forward with clear wording.</p></div>
+            <div class="step"><strong data-i18n="lbl_ch">CHALLENGE</strong><p data-i18n="c1_ch">Lease and land-right contracts for new base stations had to be correct in both wording and terms before signing.</p></div>
+            <div class="step"><strong data-i18n="lbl_ac">ACTION</strong><p data-i18n="c1_ac">I reviewed each contract for unclear Japanese expressions and for terms that did not match the agreement.</p></div>
+            <div class="step"><strong data-i18n="lbl_re">RESULT</strong><p data-i18n="c1_re">Issues were found and fixed before signing, so the contracts went forward with clear wording.</p></div>
           </div>
         </article>
 
         <article class="case">
-          <p class="case-tag">Incident reports · Network operations</p>
-          <h3>Explaining network incidents in writing</h3>
+          <p class="case-tag" data-i18n="c2_tag">Incident reports · Network operations</p>
+          <h3 data-i18n="c2_h">Explaining network incidents in writing</h3>
           <div class="steps">
-            <div class="step"><strong>CHALLENGE</strong><p>When network problems occurred, people needed to understand what happened, including readers without a technical background.</p></div>
-            <div class="step"><strong>ACTION</strong><p>I wrote incident reports that set out the cause, impact and response in clear, ordered Japanese.</p></div>
-            <div class="step"><strong>RESULT</strong><p>The reports were used to share what happened and how it was handled.</p></div>
+            <div class="step"><strong data-i18n="lbl_ch">CHALLENGE</strong><p data-i18n="c2_ch">When network problems occurred, people needed to understand what happened, including readers without a technical background.</p></div>
+            <div class="step"><strong data-i18n="lbl_ac">ACTION</strong><p data-i18n="c2_ac">I wrote incident reports that set out the cause, impact and response in clear, ordered Japanese.</p></div>
+            <div class="step"><strong data-i18n="lbl_re">RESULT</strong><p data-i18n="c2_re">The reports were used to share what happened and how it was handled.</p></div>
           </div>
         </article>
 
         <article class="case">
-          <p class="case-tag">Payroll &amp; benefits · Government</p>
-          <h3>Accurate payroll and benefits administration</h3>
+          <p class="case-tag" data-i18n="c3_tag">Payroll &amp; benefits · Government</p>
+          <h3 data-i18n="c3_h">Accurate payroll and benefits administration</h3>
           <div class="steps">
-            <div class="step"><strong>CHALLENGE</strong><p>Payroll and employee benefits must be correct every time, under detailed rules.</p></div>
-            <div class="step"><strong>ACTION</strong><p>I processed payroll and benefits work by following the rules closely and checking each item.</p></div>
-            <div class="step"><strong>RESULT</strong><p>Staff were paid and supported according to the rules.</p></div>
+            <div class="step"><strong data-i18n="lbl_ch">CHALLENGE</strong><p data-i18n="c3_ch">Payroll and employee benefits must be correct every time, under detailed rules.</p></div>
+            <div class="step"><strong data-i18n="lbl_ac">ACTION</strong><p data-i18n="c3_ac">I processed payroll and benefits work by following the rules closely and checking each item.</p></div>
+            <div class="step"><strong data-i18n="lbl_re">RESULT</strong><p data-i18n="c3_re">Staff were paid and supported according to the rules.</p></div>
           </div>
         </article>
 
         <article class="case soon">
-          <p class="case-tag">Japanese AI evaluation · Coming soon</p>
-          <h3>Sample: scoring Japanese AI answers with a rubric</h3>
-          <p style="color: var(--muted); font-size: 15px;">A self-initiated sample showing my criteria, scores and written feedback.</p>
+          <p class="case-tag" data-i18n="c4_tag">Japanese AI evaluation · Coming soon</p>
+          <h3 data-i18n="c4_h">Sample: scoring Japanese AI answers with a rubric</h3>
+          <p style="color: var(--muted); font-size: 15px;" data-i18n="c4_p">A self-initiated sample showing my criteria, scores and written feedback.</p>
         </article>
       </div>
     </div>
@@ -279,18 +312,18 @@
   <!-- 4. Contact -->
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact-title">Sound familiar?</h2>
+      <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>
+      <h2 id="contact-title" data-i18n="contact_h2">Sound familiar?</h2>
       <!-- 質問形式: クライアントの困りごとを3つ問いかける -->
       <ul class="questions">
-        <li>Not sure if your AI's Japanese sounds natural?</li>
-        <li>Machine translation that reads a little "off"?</li>
-        <li>Launching in Japan and need a native check?</li>
+        <li data-i18n="q1">Not sure if your AI's Japanese sounds natural?</li>
+        <li data-i18n="q2">Machine translation that reads a little "off"?</li>
+        <li data-i18n="q3">Launching in Japan and need a native check?</li>
       </ul>
-      <p class="answer">If yes, let's talk.</p>
-      <p>Open to Japanese AI training and evaluation, and Japanese language quality work. Remote, part-time or project-based.</p>
+      <p class="answer" data-i18n="answer">If yes, let's talk.</p>
+      <p data-i18n="contact_p">Open to Japanese AI training and evaluation, and Japanese language quality work. Remote, part-time or project-based.</p>
       <div class="btns">
-        <a class="btn btn-primary" href="mailto:MikuTsuneyamaJPW@gmail.com">Email me</a>
+        <a class="btn btn-primary" href="mailto:MikuTsuneyamaJPW@gmail.com" data-i18n="btn_email">Email me</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/miku-tsuneyama/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       </div>
     </div>
@@ -301,7 +334,7 @@
 <footer>
   <div class="wrap">
     <span>© <span id="year">2026</span> Miku Tsuneyama</span>
-    <a href="#top">Back to top ↑</a>
+    <a href="#top" data-i18n="back_top">Back to top ↑</a>
   </div>
 </footer>
 
@@ -312,6 +345,98 @@
   const header = document.getElementById("header");
   window.addEventListener("scroll", function () {
     header.classList.toggle("scrolled", window.scrollY > 8);
+  });
+
+  // ===== 英語 / 日本語の切り替え =====
+  // 日本語の文章はここにまとめてある。英語はHTMLに書いてあるものをそのまま使う。
+  const JA = {
+      "nav_about": "自己紹介",
+      "nav_cases": "実績",
+      "nav_contact": "お問い合わせ",
+      "status": "リモートワーク受付中 · 日本在住(JST)",
+      "hello": "こんにちは、Mikuです。",
+      "h1": "<span class=\"nb\">日本語AIトレーナー</span> <span class=\"nb\">&amp; 日本語スペシャリスト</span>",
+      "lead": "AIモデルやグローバルチームの日本語を、正確で自然な、日本の読み手にきちんと届く日本語に整えます。",
+      "btn_contact": "お問い合わせ →",
+      "btn_work": "実績を見る",
+      "photo": "[ ポートレート写真 ]",
+      "about_eyebrow": "自己紹介",
+      "about_h2": "<span class=\"nb\">一語一語が</span><span class=\"nb\">問われる仕事を、</span><span class=\"nb\">20年。</span>",
+      "about_body": "2006年から、小さなミスが大きな影響につながる仕事に携わってきました。8年間はIT・ネットワークエンジニアとして、大手通信会社と医療法人のネットワーク運用を担当し、障害報告書も作成してきました。通信会社では、新しい基地局のための賃貸借契約書や地上権設定契約書を、日本語の表現と契約内容の両面から精査していました。2021年からは日本の行政機関で、給与・共済の事務、情報セキュリティ、DX推進を担当しています。いまは、その丁寧さを、AIとグローバルチームのための日本語品質に活かしています。",
+      "sub_strengths": "強み",
+      "s1_h": "細部まで読む力",
+      "s1_p": "長年の契約書の精査で、あいまいな表現や小さな食い違いに気づく目を養いました。",
+      "s2_h": "ITのバックグラウンド",
+      "s2_p": "技術的な内容やITの文書を理解できるので、マニュアルやソフトウェア、サポート文書の日本語も判断できます。",
+      "s3_h": "伝わるフィードバック",
+      "s3_p": "障害報告書の作成を通じて、問題と対処を誰にでもわかるように書く力を身につけました。",
+      "sub_values": "大切にしていること",
+      "v1_h": "正確さを最優先に",
+      "v1_p": "文体より先に、事実と意味を確認します。自然な日本語は、正しい日本語から始まります。",
+      "v2_h": "直すだけでなく、理由も",
+      "v2_p": "修正にはすべて理由を添えます。次からはチームの皆さんが自分で活かせるように。",
+      "v3_h": "確実なコミュニケーション",
+      "v3_p": "ガイドラインに沿って作業し、不明点は確認し、進捗をこまめにお伝えします。",
+      "cases_eyebrow": "実績",
+      "cases_h2": "これまでの仕事。",
+      "cases_note": "これまでの職歴からの事例です。日本語AI評価や言語品質チェックのサンプルも、ここに追加していきます。",
+      "c1_tag": "契約書の精査 · 通信",
+      "c1_h": "新しい基地局の契約書をチェック",
+      "c1_ch": "新しい基地局のための賃貸借契約書や地上権設定契約書は、締結前に、表現と内容の両方が正しくなければなりませんでした。",
+      "c1_ac": "契約書ごとに、不明確な日本語の表現や、合意内容と合わない条項がないかを確認しました。",
+      "c1_re": "締結前に問題を見つけて修正し、明確な表現で契約を進められるようにしました。",
+      "c2_tag": "障害報告書 · ネットワーク運用",
+      "c2_h": "ネットワーク障害を文章で説明",
+      "c2_ch": "ネットワーク障害が起きたとき、技術に詳しくない人も含めて、何が起きたのかを理解してもらう必要がありました。",
+      "c2_ac": "原因・影響・対応を、整理されたわかりやすい日本語で障害報告書にまとめました。",
+      "c2_re": "報告書は、何が起き、どう対応したかを共有するために活用されました。",
+      "c3_tag": "給与・共済 · 行政機関",
+      "c3_h": "正確な給与・共済事務",
+      "c3_ch": "給与と共済の事務は、細かな規則のもとで、毎回正確でなければなりません。",
+      "c3_ac": "規則に沿って一つひとつ確認しながら、給与・共済の事務を処理しました。",
+      "c3_re": "規則どおりに、職員への支給と支援を行いました。",
+      "c4_tag": "日本語AI評価 · 準備中",
+      "c4_h": "サンプル:評価基準を使った日本語AI回答の採点",
+      "c4_p": "評価基準、スコア、フィードバックを示す自主制作のサンプルです。",
+      "contact_eyebrow": "お問い合わせ",
+      "contact_h2": "こんなこと、ありませんか?",
+      "q1": "AIの日本語が自然かどうか、判断できない",
+      "q2": "機械翻訳の日本語が、なんとなく不自然",
+      "q3": "日本向けの公開前に、ネイティブのチェックがほしい",
+      "answer": "<span class=\"nb\">ひとつでも当てはまったら、</span><span class=\"nb\">お気軽にご連絡ください。</span>",
+      "contact_p": "日本語AIのトレーニング・評価、日本語の品質チェックのお仕事を承ります。リモート、パートタイム、プロジェクト単位で対応します。",
+      "btn_email": "メールで問い合わせる",
+      "back_top": "ページの先頭へ ↑",
+      "lbl_ch": "課題",
+      "lbl_ac": "行動",
+      "lbl_re": "結果"
+  };
+  const META = {
+    en: { title: document.title },
+    ja: { title: "Miku Tsuneyama — 日本語AIトレーナー / 日本語スペシャリスト" }
+  };
+  const nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (el) { el.dataset.en = el.innerHTML; });
+
+  function setLang(lang) {
+    nodes.forEach(function (el) {
+      const key = el.dataset.i18n;
+      el.innerHTML = (lang === "ja" && JA[key]) ? JA[key] : el.dataset.en;
+    });
+    document.documentElement.lang = lang;
+    document.title = META[lang].title;
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+
+  // 最初の表示: URLに ?lang=ja があれば日本語、前回選んだ言語があればそれ、なければ英語
+  let start = "en";
+  try { start = localStorage.getItem("lang") || "en"; } catch (e) {}
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q === "ja" || q === "en") start = q;
+  if (start === "ja") setLang("ja");
+
+  document.getElementById("lang-toggle").addEventListener("click", function () {
+    setLang(document.documentElement.lang === "ja" ? "en" : "ja");
   });
 </script>
 </body>
